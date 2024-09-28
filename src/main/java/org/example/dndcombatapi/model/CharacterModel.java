@@ -18,11 +18,11 @@ public class CharacterModel {
 
     @Override
     public String toString() {
-        return  "Your character seems good to go." + "\n\n" +
+        return  "Your character looks like this:" + "\n\n" +
                 "Name: " + name + '\n' +
                 "Strength: " + strength + "\n" +
                 "Dexterity: " + dexterity + "\n" +
-                "HP: " + hitPoints + "\n" +
-                "AC: " + armorClass;
+                "Hit Pointa: " + hitPoints + "\n" +
+                "Armor Class: " + armorClass;
     }
 }
