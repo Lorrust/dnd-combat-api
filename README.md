@@ -16,6 +16,8 @@ This API provides endpoints for fetching monster details, conducting battles, an
 - Spring Boot
 - Spring WebFlux
 - WebClient
+- Docker
+- Maven
 
 ## Endpoints
 
@@ -146,6 +148,8 @@ Returns an object cointaining my name, along with the project title.
 
 ## How to Run
 
+### Without Docker
+
 **1. Clone the repository:**
 ```bash
 git clone https://github.com/Lorrust/dnd-combat-api.git
@@ -161,6 +165,21 @@ cd dnd-combat-api
 **3. Run the application:**
 ```bash
 ./mvnw spring-boot:run
+```
+
+**4. Access the API at `http://localhost:8080`.**
+
+### With Docker
+
+**1. Clone the repository:**
+```bash
+git clone <repository_url>
+cd dnd-combat-api
+```
+
+**2. Build and run the application using Docker Compose:**
+```bash
+docker-compose up --build
 ```
 
 **4. Access the API at `http://localhost:8080`.**
