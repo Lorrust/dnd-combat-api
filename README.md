@@ -56,7 +56,7 @@ Fetches the character model of a specific monster.
 ```
 
 ### 3. Simulate Battle
-**POST** /battle/{monster}
+**POST** `/battle/{monster}`
 Simulates a battle between a user-defined character and a specified monster.
 
 ### Request Body
