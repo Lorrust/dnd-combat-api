@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/combat")
+@RequestMapping("/api/battle")
 public class BattleController {
 
     private final BattleService battleService;
