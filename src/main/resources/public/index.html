@@ -1,90 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>D&D Combat API</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;600&family=Fira+Code&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
+        :root {
+            --dd-red: #D00000;
+            --text-dark: #1a1a1a;
+            --bg-light: #f6f4f2;
+            --card-bg: #fff;
+            --code-bg-light: #fceeee;
+            --code-text: #4a0000;
+            --primary-font: 'Inter', sans-serif;
+            --fantasy-font: 'Cinzel Decorative', cursive;
+            --code-font: 'Fira Code', monospace;
+        }
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            margin: 2rem;
-            background: #f8f8f8;
-            color: #333;
-        }
-        h1 {
-            color: #4a2c82;
-            font-weight: 600;
-        }
-        h2 {
-            margin-top: 1.5rem;
-            color: #2c3e50;
-            font-weight: 600;
-        }
-        ul {
-            margin-top: 0.5rem;
-        }
-        code {
-            background: #eee;
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            font-family: monospace;
+            margin: 0;
+            padding: 0;
+            font-family: var(--primary-font), Verdana, serif;
+            background: var(--bg-light);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .container {
             max-width: 900px;
-            margin: auto;
-            padding: 2rem;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 2.5rem 3rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
         }
-        .footer-box {
-            margin-top: 2rem;
-            padding-top: 1rem;
-            border-top: 1px solid #eee;
+        .title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            font-family: var(--fantasy-font), cursive;
+            font-size: 2.75rem;
+            color: var(--dd-red);
             text-align: center;
-            font-size: 0.9rem;
-            color: #555;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
         }
-        .footer-box a {
-            color: #4a2c82;
+
+        .title i {
+            font-size: 2.2rem;
+            color: var(--dd-red);
+            vertical-align: middle;
+        }
+
+        h2 {
+            color: var(--text-dark);
+            margin-top: 2rem;
+            font-size: 1.5rem;
+            border-left: 4px solid var(--dd-red);
+            padding-left: 0.6rem;
+        }
+
+        p {
+            color: #333;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        ul {
+            margin-top: 1rem;
+            padding-left: 1.2rem;
+            color: #333;
+        }
+
+        li {
+            margin-bottom: 0.6rem;
+        }
+
+        code {
+            background: rgba(208, 0, 0, 0.1);
+            padding: 0.25rem 0.4rem;
+            border-radius: 4px;
+            font-family: var(--code-font), Consolas, serif;
+            font-size: 0.95rem;
+            color: #b30000;
+        }
+
+        pre {
+            background: var(--code-bg-light);
+            color: var(--code-text);
+            padding: 1rem 1.2rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 0.95rem;
+            font-family: var(--code-font), Consolas, serif;
+            margin-top: 1rem;
+            line-height: 1.5;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            margin: 0;
+            display: block;
+            line-height: inherit;
+        }
+
+        a {
+            color: var(--dd-red);
             text-decoration: none;
             font-weight: 500;
         }
-        .footer-box a:hover {
+
+        a:hover {
             text-decoration: underline;
+        }
+
+        .footer-box {
+            margin-top: 1rem;
+            padding-top: 2rem;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .footer-box strong {
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 1.5rem;
+            }
+
+            .title {
+                font-size: 2.2rem;
+            }
+
+            .title i {
+                font-size: 1.8rem;
+            }
+
+            pre {
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>D&D Combat API</h1>
+    <div class="title">
+        <i class="fas fa-dice-d20"></i>
+        D&D Combat API
+    </div>
 
     <h2>Overview</h2>
     <p>
-        D&D Combat API is a RESTful service that allows you to simulate battles between
-        custom characters and monsters from the Dungeons &amp; Dragons universe.
-        It provides endpoints for fetching monster details, running battles, and checking characters.
+        D&D Combat API is a RESTful service to simulate battles between user-defined characters
+        and monsters from the Dungeons &amp; Dragons universe. It provides endpoints to fetch monster details,
+        battle monsters, and inspect characters.
     </p>
-
-    <h2>Features</h2>
-    <ul>
-        <li>Fetch a list of monster names with pagination.</li>
-        <li>Retrieve detailed monster stats by name.</li>
-        <li>Simulate combat between a user-defined character and a monster.</li>
-        <li>Validate a user-defined character.</li>
-        <li>Get a sample character for reference.</li>
-    </ul>
 
     <h2>Endpoints</h2>
     <ul>
-        <li><code>POST /api/battle/{monsterName}</code> – Simulates a battle between your character and a monster.</li>
-        <li><code>GET /api/monsters/names/{page}</code> – Returns a paginated list of monster names (1–65).</li>
-        <li><code>GET /api/monsters/{monsterName}</code> – Retrieves detailed stats for a specific monster.</li>
-        <li><code>POST /api/characters/check</code> – Validates the details of a submitted character.</li>
-        <li><code>GET /api/characters/example</code> – Returns an example character template.</li>
+        <li><code>POST /api/battle/battle/{monster}</code> – Simulates a battle between your character and a monster.</li>
+        <li><code>GET /api/monsters/names/{page}</code> – Get a list of monster names (1–65).</li>
+        <li><code>GET /api/monsters/{name}</code> – Get details of a specific monster.</li>
+        <li><code>POST /api/characters/check</code> – Validate your character.</li>
+        <li><code>GET /api/characters/example</code> – Get a template example character.</li>
     </ul>
 
-    <p><em>Note: This project uses data from the <a href="https://open5e.com/" target="_blank">Open5e API</a> for educational and non-commercial purposes.</em></p>
+    <h2>Example</h2>
+    <pre><code>{
+  "name": "Kaya",
+  "strength": 10,
+  "dexterity": 7,
+  "hitPoints": 11,
+  "armorClass": 12
+}</code></pre>
+
+    <p><em>Note: This project uses data from <a href="https://open5e.com/" target="_blank">Open5e API</a> for learning purposes.</em></p>
 
     <div class="footer-box">
         Created by <strong>Lucas Silva</strong> • <a href="https://github.com/Lorrust" target="_blank">GitHub</a>
