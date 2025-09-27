@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>D&D Combat API</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 2rem;
+            background: #f8f8f8;
+            color: #333;
+        }
+        h1 {
+            color: #4a2c82;
+            font-weight: 600;
+        }
+        h2 {
+            margin-top: 1.5rem;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        ul {
+            margin-top: 0.5rem;
+        }
+        code {
+            background: #eee;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .footer-box {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        .footer-box a {
+            color: #4a2c82;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .footer-box a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>D&D Combat API</h1>
+
+    <h2>Overview</h2>
+    <p>
+        D&D Combat API is a RESTful web service that allows users to simulate battles between
+        characters and monsters from the Dungeons &amp; Dragons universe. It provides endpoints
+        for fetching monster details, conducting battles, and retrieving a list of available monsters.
+    </p>
+
+    <h2>Features</h2>
+    <ul>
+        <li>Fetch a list of monster names.</li>
+        <li>Retrieve monster details by name.</li>
+        <li>Simulate combat between user-defined characters and monsters.</li>
+        <li>Check a user-defined character.</li>
+        <li>Get a template character to use as request body.</li>
+    </ul>
+
+    <h2>Endpoints</h2>
+    <ul>
+        <li><code>GET /monsters/{page}</code> – Fetches a page of monster names (1–65).</li>
+        <li><code>GET /monsters/{name}</code> – Retrieves details of a specific monster.</li>
+        <li><code>POST /battle/{monster}</code> – Simulates a battle against a monster.</li>
+        <li><code>POST /check</code> – Validate the details of your character.</li>
+        <li><code>GET /example</code> – Provides an example character.</li>
+    </ul>
+
+    <p><em>Note: This project uses data from the <a href="https://open5e.com/" target="_blank">Open5e API</a> for educational and non-commercial purposes.</em></p>
+
+    <div class="footer-box">
+        Created by <strong>Lucas Silva</strong> • <a href="https://github.com/Lorrust" target="_blank">GitHub</a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,6 +1,5 @@
 package org.example.dndcombatapi.controller;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.example.dndcombatapi.model.CharacterModel;
 import org.example.dndcombatapi.model.ResultModel;
 import org.example.dndcombatapi.service.CharacterService;
@@ -9,8 +8,6 @@ import org.example.dndcombatapi.service.DndApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Field;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,14 +23,6 @@ public class CombatController {
 
     @Autowired
     private CharacterService characterService;
-
-    @GetMapping("/sobre")
-    public Map<String, String> projectInfo() {
-        HashMap<String, String> info = new HashMap<>();
-        info.put("estudante", "Lucas Silva");
-        info.put("projeto", "D&D Combat API");
-        return info;
-    }
 
     @GetMapping("/example")
     public CharacterModel exampleCharacter() {
