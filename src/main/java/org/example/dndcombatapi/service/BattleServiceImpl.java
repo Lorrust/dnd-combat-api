@@ -7,29 +7,39 @@ import org.springframework.stereotype.Service;
 import java.util.Random;
 
 @Service
-public class CombatServiceImpl implements CombatService {
+public class BattleServiceImpl implements BattleService {
 
     private static final int BASE_DAMAGE = 6;
     private final Random random = new Random();
 
-    @Override
     public ResultModel battle(CharacterModel user, CharacterModel enemy) {
         ResultModel result = new ResultModel();
+
+        final int userMaxHp = user.getHitPoints();
+        final int enemyMaxHp = enemy.getHitPoints();
 
         CharacterModel starter = defineInitiative(user, enemy);
         CharacterModel second = (starter == user) ? enemy : user;
 
-        result.addBattleLog("Battle begins!");
-        result.addBattleLog(user.getName() + " HP: " + user.getHitPoints() +
-                " | " + enemy.getName() + " HP: " + enemy.getHitPoints());
-
         int rounds = 0;
+
+        result.addBattleLog("The battle begins!");
+
+        result.addBattleLog(
+                formatHpLog(user, userMaxHp, enemy, enemyMaxHp)
+        );
 
         while (starter.getHitPoints() > 0 && second.getHitPoints() > 0) {
             rounds++;
-            result.addBattleLog("Round " + rounds + " begins!");
+            result.addBattleLog("Round " + rounds + "!");
+
             attack(starter, second, result);
+            result.addBattleLog(
+                    formatHpLog(user, userMaxHp, enemy, enemyMaxHp)
+            );
+
             if (second.getHitPoints() <= 0) break;
+
             attack(second, starter, result);
         }
 
@@ -43,6 +53,12 @@ public class CombatServiceImpl implements CombatService {
         result.addBattleLog(finalMessage);
 
         return result;
+    }
+
+    private String formatHpLog(CharacterModel user, int userMaxHp,
+                               CharacterModel enemy, int enemyMaxHp) {
+        return user.getName() + " (" + user.getHitPoints() + "/" + userMaxHp + " HP) | " +
+                enemy.getName() + " (" + enemy.getHitPoints() + "/" + enemyMaxHp + " HP)";
     }
 
     private Integer rollDice(Integer faces) {
@@ -64,11 +80,6 @@ public class CombatServiceImpl implements CombatService {
         } else {
             result.addBattleLog(attacker.getName() + " missed.");
         }
-
-        result.addBattleLog(
-                attacker.getName() + " HP: " + attacker.getHitPoints() +
-                        " | " + defender.getName() + " HP: " + defender.getHitPoints()
-        );
     }
 
     private Integer scoreModifier(Integer score) {
