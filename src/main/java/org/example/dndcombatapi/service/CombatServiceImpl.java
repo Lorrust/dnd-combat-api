@@ -10,39 +10,52 @@ import java.util.Random;
 public class CombatServiceImpl implements CombatService {
 
     private static final int BASE_DAMAGE = 6;
+    private final Random random = new Random();
 
     @Override
     public ResultModel battle(CharacterModel user, CharacterModel enemy) {
         ResultModel result = new ResultModel();
+
         CharacterModel starter = defineInitiative(user, enemy);
         CharacterModel second = (starter == user) ? enemy : user;
 
+        result.addBattleLog("Battle begins!");
+        result.addBattleLog(user.getName() + " HP: " + user.getHitPoints() +
+                " | " + enemy.getName() + " HP: " + enemy.getHitPoints());
+
+        int rounds = 0;
+
         while (starter.getHitPoints() > 0 && second.getHitPoints() > 0) {
+            rounds++;
+            result.addBattleLog("Round " + rounds + " begins!");
             attack(starter, second, result);
-            if (second.getHitPoints() <= 0) {
-                break;
-            }
+            if (second.getHitPoints() <= 0) break;
             attack(second, starter, result);
         }
 
-        result.setWinner(starter.getHitPoints() > 0 ? starter.getName() : second.getName());
-        result.addBattleLog(starter.getHitPoints() > 0 ? starter.getName() + " defeated " + second.getName() + "." : second.getName() + " defeated " + starter.getName() + ".");
+        result.setRounds(rounds);
+
+        String winner = starter.getHitPoints() > 0 ? starter.getName() : second.getName();
+        result.setWinner(winner);
+
+        String finalMessage = winner + " won the battle in " + rounds + " rounds!";
+        result.setFinalMessage(finalMessage);
+        result.addBattleLog(finalMessage);
 
         return result;
     }
 
-    public Integer rollDice(Integer faces) {
-        Random random = new Random();
+    private Integer rollDice(Integer faces) {
         return random.nextInt(faces) + 1;
     }
 
-    public CharacterModel defineInitiative(CharacterModel user, CharacterModel enemy) {
+    private CharacterModel defineInitiative(CharacterModel user, CharacterModel enemy) {
         int userRoll = rollDice(20) + scoreModifier(user.getDexterity());
         int enemyRoll = rollDice(20) + scoreModifier(enemy.getDexterity());
         return (userRoll >= enemyRoll) ? user : enemy;
     }
 
-    public void attack(CharacterModel attacker, CharacterModel defender, ResultModel result) {
+    private void attack(CharacterModel attacker, CharacterModel defender, ResultModel result) {
         int attackRoll = rollDice(20) + scoreModifier(attacker.getStrength());
         if (attackRoll > defender.getArmorClass()) {
             int damage = rollDice(BASE_DAMAGE) + scoreModifier(attacker.getStrength());
@@ -51,9 +64,14 @@ public class CombatServiceImpl implements CombatService {
         } else {
             result.addBattleLog(attacker.getName() + " missed.");
         }
+
+        result.addBattleLog(
+                attacker.getName() + " HP: " + attacker.getHitPoints() +
+                        " | " + defender.getName() + " HP: " + defender.getHitPoints()
+        );
     }
 
-    public Integer scoreModifier(Integer score) {
+    private Integer scoreModifier(Integer score) {
         return (score - 10) / 2;
     }
 }

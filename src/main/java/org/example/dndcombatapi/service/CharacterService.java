@@ -1,14 +1,14 @@
 package org.example.dndcombatapi.service;
 
+import org.example.dndcombatapi.dto.MonsterCharacterDTO;
+import org.example.dndcombatapi.dto.UserCharacterDTO;
 import org.example.dndcombatapi.model.CharacterModel;
-
-import java.util.Map;
 
 public interface CharacterService {
 
-    CharacterModel transformMonsterToCharacter(Map<String, Object> monsterData);
+    CharacterModel transformMonsterToCharacter(MonsterCharacterDTO monsterData);
 
-    String checkStats(CharacterModel characterModel);
+    CharacterModel transformUserToCharacter(UserCharacterDTO userCharacterDTO);
 
     CharacterModel exampleCharacter();
 }

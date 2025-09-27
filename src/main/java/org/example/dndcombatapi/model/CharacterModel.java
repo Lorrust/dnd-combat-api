@@ -18,11 +18,9 @@ public class CharacterModel {
 
     @Override
     public String toString() {
-        return  "Your character looks like this:" + "\n\n" +
-                "Name: " + name + '\n' +
-                "Strength: " + strength + "\n" +
-                "Dexterity: " + dexterity + "\n" +
-                "Hit Pointa: " + hitPoints + "\n" +
-                "Armor Class: " + armorClass;
+        return String.format(
+                "Your character looks like this:\n\nName: %s\nStrength: %d\nDexterity: %d\nHit Points: %d\nArmor Class: %d",
+                name, strength, dexterity, hitPoints, armorClass
+        );
     }
 }

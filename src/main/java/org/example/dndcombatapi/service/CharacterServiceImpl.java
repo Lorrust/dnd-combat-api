@@ -1,29 +1,33 @@
 package org.example.dndcombatapi.service;
 
+import org.example.dndcombatapi.dto.MonsterCharacterDTO;
+import org.example.dndcombatapi.dto.UserCharacterDTO;
 import org.example.dndcombatapi.model.CharacterModel;
 import org.springframework.stereotype.Service;
-
-import java.lang.reflect.Field;
-import java.util.Map;
 
 @Service
 public class CharacterServiceImpl implements CharacterService {
 
-    public CharacterModel transformMonsterToCharacter(Map<String, Object> monsterData) {
-        CharacterModel character = new CharacterModel();
-
-        character.setName((String) monsterData.get("name"));
-        character.setStrength((Integer) monsterData.get("strength"));
-        character.setDexterity((Integer) monsterData.get("dexterity"));
-        character.setHitPoints((Integer) monsterData.get("hit_points"));
-        character.setArmorClass((Integer) monsterData.get("armor_class"));
-
-        return character;
+    @Override
+    public CharacterModel transformUserToCharacter(UserCharacterDTO dto) {
+        return new CharacterModel(
+                dto.getName(),
+                dto.getStrength(),
+                dto.getDexterity(),
+                dto.getHitPoints(),
+                dto.getArmorClass()
+        );
     }
 
     @Override
-    public String checkStats(CharacterModel characterModel) {
-        return characterModel.toString();
+    public CharacterModel transformMonsterToCharacter(MonsterCharacterDTO dto) {
+        return new CharacterModel(
+                dto.getName(),
+                dto.getStrength(),
+                dto.getDexterity(),
+                dto.getHitPoints(),
+                dto.getArmorClass()
+        );
     }
 
     @Override
