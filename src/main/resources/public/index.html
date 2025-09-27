@@ -61,27 +61,27 @@
 
     <h2>Overview</h2>
     <p>
-        D&D Combat API is a RESTful web service that allows users to simulate battles between
-        characters and monsters from the Dungeons &amp; Dragons universe. It provides endpoints
-        for fetching monster details, conducting battles, and retrieving a list of available monsters.
+        D&D Combat API is a RESTful service that allows you to simulate battles between
+        custom characters and monsters from the Dungeons &amp; Dragons universe.
+        It provides endpoints for fetching monster details, running battles, and checking characters.
     </p>
 
     <h2>Features</h2>
     <ul>
-        <li>Fetch a list of monster names.</li>
-        <li>Retrieve monster details by name.</li>
-        <li>Simulate combat between user-defined characters and monsters.</li>
-        <li>Check a user-defined character.</li>
-        <li>Get a template character to use as request body.</li>
+        <li>Fetch a list of monster names with pagination.</li>
+        <li>Retrieve detailed monster stats by name.</li>
+        <li>Simulate combat between a user-defined character and a monster.</li>
+        <li>Validate a user-defined character.</li>
+        <li>Get a sample character for reference.</li>
     </ul>
 
     <h2>Endpoints</h2>
     <ul>
-        <li><code>GET /monsters/{page}</code> – Fetches a page of monster names (1–65).</li>
-        <li><code>GET /monsters/{name}</code> – Retrieves details of a specific monster.</li>
-        <li><code>POST /battle/{monster}</code> – Simulates a battle against a monster.</li>
-        <li><code>POST /check</code> – Validate the details of your character.</li>
-        <li><code>GET /example</code> – Provides an example character.</li>
+        <li><code>GET /monsters/names/{page}</code> – Returns a paginated list of monster names (1–65).</li>
+        <li><code>GET /monsters/{monsterName}</code> – Retrieves detailed stats for a specific monster.</li>
+        <li><code>POST /battle/{monsterName}</code> – Simulates a battle between your character and a monster.</li>
+        <li><code>POST /character/check</code> – Validates the details of a submitted character.</li>
+        <li><code>GET /character/example</code> – Returns an example character template.</li>
     </ul>
 
     <p><em>Note: This project uses data from the <a href="https://open5e.com/" target="_blank">Open5e API</a> for educational and non-commercial purposes.</em></p>
